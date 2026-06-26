@@ -8,12 +8,16 @@ const bentoGrids = document.querySelectorAll(".bento-grid");
 function updateBentoGridMetrics() {
   bentoGrids.forEach((grid) => {
     const gridRect = grid.getBoundingClientRect();
-    const edges = new Set();
+    const lines = [];
 
     grid.querySelectorAll(":scope > .tile").forEach((tile) => {
       const rect = tile.getBoundingClientRect();
-      edges.add(Math.round(rect.left - gridRect.left));
-      edges.add(Math.round(rect.right - gridRect.left));
+      const top = Math.round(rect.bottom - gridRect.top);
+
+      lines.push(
+        { x: Math.round(rect.left - gridRect.left), top },
+        { x: Math.round(rect.right - gridRect.left), top }
+      );
     });
 
     let layer = grid.querySelector(":scope > .construction-layer");
@@ -25,12 +29,13 @@ function updateBentoGridMetrics() {
     }
 
     layer.replaceChildren(
-      ...[...edges]
-        .sort((a, b) => a - b)
-        .map((edge) => {
+      ...lines
+        .sort((a, b) => a.x - b.x || a.top - b.top)
+        .map(({ x, top }) => {
           const line = document.createElement("span");
           line.className = "construction-line";
-          line.style.left = `${edge}px`;
+          line.style.left = `${x}px`;
+          line.style.top = `${top}px`;
           return line;
         })
     );
