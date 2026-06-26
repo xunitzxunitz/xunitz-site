@@ -3,44 +3,6 @@ const nav = document.querySelector("[data-nav]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const parallaxLayer = document.querySelector("[data-parallax]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const bentoGrids = document.querySelectorAll(".bento-grid");
-
-function updateBentoGridMetrics() {
-  bentoGrids.forEach((grid) => {
-    const gridRect = grid.getBoundingClientRect();
-    const lines = [];
-
-    grid.querySelectorAll(":scope > .tile").forEach((tile) => {
-      const rect = tile.getBoundingClientRect();
-      const top = Math.round(rect.bottom - gridRect.top);
-
-      lines.push(
-        { x: Math.round(rect.left - gridRect.left), top },
-        { x: Math.round(rect.right - gridRect.left), top }
-      );
-    });
-
-    let layer = grid.querySelector(":scope > .construction-layer");
-
-    if (!layer) {
-      layer = document.createElement("div");
-      layer.className = "construction-layer";
-      grid.prepend(layer);
-    }
-
-    layer.replaceChildren(
-      ...lines
-        .sort((a, b) => a.x - b.x || a.top - b.top)
-        .map(({ x, top }) => {
-          const line = document.createElement("span");
-          line.className = "construction-line";
-          line.style.left = `${x}px`;
-          line.style.top = `${top}px`;
-          return line;
-        })
-    );
-  });
-}
 
 function updateHeader() {
   header?.classList.toggle("is-scrolled", window.scrollY > 18);
@@ -100,10 +62,7 @@ document.querySelectorAll(".reveal").forEach((element) => {
 });
 
 window.addEventListener("scroll", updateHeader, { passive: true });
-window.addEventListener("resize", () => {
-  updateHeader();
-  updateBentoGridMetrics();
-});
+window.addEventListener("resize", updateHeader);
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeMenu();
@@ -111,4 +70,3 @@ window.addEventListener("keydown", (event) => {
 });
 
 updateHeader();
-updateBentoGridMetrics();
