@@ -7,10 +7,10 @@ const bentoGrids = document.querySelectorAll(".bento-grid");
 
 function updateBentoGridMetrics() {
   bentoGrids.forEach((grid) => {
-    const firstTile = grid.querySelector(".tile");
     const styles = getComputedStyle(grid);
+    const columns = styles.gridTemplateColumns.split(" ").filter(Boolean);
     const gap = parseFloat(styles.columnGap) || 0;
-    const cell = firstTile?.getBoundingClientRect().width || 0;
+    const cell = columns.length ? parseFloat(columns[0]) : 0;
 
     if (cell > 0) {
       grid.style.setProperty("--grid-cell", `${cell}px`);
