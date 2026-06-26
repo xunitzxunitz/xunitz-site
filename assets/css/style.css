@@ -11,6 +11,9 @@
   --blue: #307080;
   --green: #407060;
   --blush: #c08090;
+  --grid-line: rgba(20, 16, 15, 0.105);
+  --grid-line-light: rgba(244, 240, 231, 0.16);
+  --grid-size: clamp(72px, 9.5vw, 128px);
   --max: 1320px;
   --pad: clamp(16px, 3vw, 48px);
   --gap: clamp(10px, 1.4vw, 18px);
@@ -43,7 +46,14 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    radial-gradient(circle at 50% 0%, rgba(244, 240, 231, 0.76), transparent 42%),
+    var(--paper);
+  background-attachment: fixed;
+  background-position: center top;
+  background-size: var(--grid-size) var(--grid-size), var(--grid-size) var(--grid-size), auto, auto;
   color: var(--ink);
   font-family: "Helvetica Neue", Arial, system-ui, sans-serif;
   line-height: 1.45;
@@ -214,9 +224,20 @@ p {
 }
 
 .bento-section {
+  position: relative;
   width: min(var(--max), 100%);
   margin: 0 auto;
   padding: clamp(56px, 8vw, 110px) var(--pad);
+}
+
+.bento-section::before {
+  content: "";
+  position: absolute;
+  inset: 0 var(--pad);
+  z-index: -1;
+  border-right: 1px solid rgba(20, 16, 15, 0.05);
+  border-left: 1px solid rgba(20, 16, 15, 0.05);
+  pointer-events: none;
 }
 
 .hero-bento {
@@ -247,6 +268,34 @@ p {
   border: 1px solid rgba(244, 240, 231, 0.24);
   color: var(--white);
   transition: transform 180ms ease, filter 180ms ease;
+}
+
+.tile > * {
+  position: relative;
+  z-index: 2;
+}
+
+.tile:not(.image-tile)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(var(--grid-line-light) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line-light) 1px, transparent 1px);
+  background-size: 25% 25%;
+  opacity: 0.55;
+  pointer-events: none;
+  mask-image: linear-gradient(180deg, #000 0%, #000 42%, rgba(0, 0, 0, 0.34) 72%, transparent 100%);
+}
+
+.tile:not(.image-tile)::after {
+  content: "";
+  position: absolute;
+  inset: 42% 0 0;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent, rgba(20, 16, 15, 0.16));
+  pointer-events: none;
 }
 
 a.tile:hover,
@@ -313,6 +362,20 @@ a.tile:focus-visible {
   background: var(--blush);
   color: var(--ink);
   border-color: rgba(20, 16, 15, 0.18);
+}
+
+.color-blush::before,
+.color-paper::before,
+.contact-form::before {
+  background:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+}
+
+.color-blush::after,
+.color-paper::after,
+.contact-form::after {
+  background: linear-gradient(180deg, transparent, rgba(244, 240, 231, 0.42));
 }
 
 .color-paper {
