@@ -7,15 +7,33 @@ const bentoGrids = document.querySelectorAll(".bento-grid");
 
 function updateBentoGridMetrics() {
   bentoGrids.forEach((grid) => {
-    const styles = getComputedStyle(grid);
-    const columns = styles.gridTemplateColumns.split(" ").filter(Boolean);
-    const gap = parseFloat(styles.columnGap) || 0;
-    const cell = columns.length ? parseFloat(columns[0]) : 0;
+    const gridRect = grid.getBoundingClientRect();
+    const edges = new Set();
 
-    if (cell > 0) {
-      grid.style.setProperty("--grid-cell", `${cell}px`);
-      grid.style.setProperty("--grid-gap", `${gap}px`);
+    grid.querySelectorAll(":scope > .tile").forEach((tile) => {
+      const rect = tile.getBoundingClientRect();
+      edges.add(Math.round(rect.left - gridRect.left));
+      edges.add(Math.round(rect.right - gridRect.left));
+    });
+
+    let layer = grid.querySelector(":scope > .construction-layer");
+
+    if (!layer) {
+      layer = document.createElement("div");
+      layer.className = "construction-layer";
+      grid.prepend(layer);
     }
+
+    layer.replaceChildren(
+      ...[...edges]
+        .sort((a, b) => a - b)
+        .map((edge) => {
+          const line = document.createElement("span");
+          line.className = "construction-line";
+          line.style.left = `${edge}px`;
+          return line;
+        })
+    );
   });
 }
 
