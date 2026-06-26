@@ -3,6 +3,21 @@ const nav = document.querySelector("[data-nav]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const parallaxLayer = document.querySelector("[data-parallax]");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const bentoGrids = document.querySelectorAll(".bento-grid");
+
+function updateBentoGridMetrics() {
+  bentoGrids.forEach((grid) => {
+    const firstTile = grid.querySelector(".tile");
+    const styles = getComputedStyle(grid);
+    const gap = parseFloat(styles.columnGap) || 0;
+    const cell = firstTile?.getBoundingClientRect().width || 0;
+
+    if (cell > 0) {
+      grid.style.setProperty("--grid-cell", `${cell}px`);
+      grid.style.setProperty("--grid-gap", `${gap}px`);
+    }
+  });
+}
 
 function updateHeader() {
   header?.classList.toggle("is-scrolled", window.scrollY > 18);
@@ -62,7 +77,10 @@ document.querySelectorAll(".reveal").forEach((element) => {
 });
 
 window.addEventListener("scroll", updateHeader, { passive: true });
-window.addEventListener("resize", updateHeader);
+window.addEventListener("resize", () => {
+  updateHeader();
+  updateBentoGridMetrics();
+});
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     closeMenu();
@@ -70,3 +88,4 @@ window.addEventListener("keydown", (event) => {
 });
 
 updateHeader();
+updateBentoGridMetrics();
