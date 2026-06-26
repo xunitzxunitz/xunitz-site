@@ -248,6 +248,11 @@ p {
   grid-auto-flow: dense;
 }
 
+.construction-layer,
+.construction-line {
+  display: none !important;
+}
+
 .hero-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
