@@ -272,10 +272,10 @@ p {
 
 .construction-line {
   position: absolute;
-  top: 0;
   bottom: 0;
   width: 1px;
   background: rgba(20, 16, 15, 0.28);
+  transform: translateX(-0.5px);
 }
 
 .hero-grid {
