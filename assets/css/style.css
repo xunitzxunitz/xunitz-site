@@ -258,10 +258,10 @@ p {
 .bento-grid::before {
   content: "";
   position: absolute;
-  top: calc(var(--gap) * -0.5);
-  right: calc(var(--gap) * -0.5);
+  top: 0;
+  right: 0;
   bottom: clamp(-420px, -32vw, -260px);
-  left: calc(var(--gap) * -0.5);
+  left: 0;
   z-index: 0;
   background:
     repeating-linear-gradient(
@@ -287,9 +287,9 @@ p {
   content: "";
   position: absolute;
   top: calc(100% + var(--gap));
-  right: calc(var(--gap) * -0.5);
+  right: 0;
   bottom: clamp(-520px, -42vw, -340px);
-  left: calc(var(--gap) * -0.5);
+  left: 0;
   z-index: 0;
   background: repeating-linear-gradient(
     90deg,
