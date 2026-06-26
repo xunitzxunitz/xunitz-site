@@ -320,6 +320,11 @@ a.tile:focus-visible {
   gap: 20px;
 }
 
+.tile-hero h1 {
+  max-width: 12ch;
+  font-size: clamp(3.2rem, 6.8vw, 7.1rem);
+}
+
 .tile-hero .lead {
   color: var(--white);
   font-size: clamp(1.2rem, 1.8vw, 1.75rem);
