@@ -316,18 +316,19 @@ a.tile:focus-visible {
 }
 
 .tile-hero {
-  justify-content: end;
-  gap: 20px;
+  justify-content: center;
+  gap: clamp(18px, 2vw, 28px);
 }
 
 .tile-hero h1 {
-  max-width: 12ch;
-  font-size: clamp(3.2rem, 6.8vw, 7.1rem);
+  max-width: 11ch;
+  font-size: clamp(2.7rem, 5.25vw, 5.7rem);
+  line-height: 0.92;
 }
 
 .tile-hero .lead {
   color: var(--white);
-  font-size: clamp(1.2rem, 1.8vw, 1.75rem);
+  font-size: clamp(1.05rem, 1.35vw, 1.38rem);
   line-height: 1.25;
 }
 
