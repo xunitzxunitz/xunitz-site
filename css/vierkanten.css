@@ -1,0 +1,72 @@
+:root{
+  --paper:#f4f2ec;--ink:#0b0b0b;--mute:#7b7871;--hair:rgba(11,11,11,.18);
+  --sans:'Instrument Sans',Arial,Helvetica,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  --pad:clamp(20px,3vw,48px);--bar:56px;--g:clamp(12px,1.4vw,22px);
+  --W:min(calc(100vw - 2*var(--pad)),1680px);
+  --s:calc((var(--W) - var(--g)) / 2);   /* zijde van elk vierkant */
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--paper);scroll-behavior:smooth;scroll-padding-top:var(--bar)}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.mono{font-family:var(--mono);font-size:10.5px;line-height:1.6;letter-spacing:.06em;text-transform:uppercase}
+.mute{color:var(--mute)}
+
+.bar{position:sticky;top:0;z-index:10;background:var(--paper);height:var(--bar);display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:0 var(--pad);font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+.bar>*:nth-child(2){padding-left:12%}
+.bar nav{display:flex;gap:clamp(16px,2.6vw,38px);justify-content:flex-end;color:var(--mute)}
+.bar nav a{display:flex;align-items:center}
+.bar nav a[aria-current]{color:var(--ink)}
+.bar nav a[aria-current]::before{content:"";width:8px;height:8px;background:var(--ink);margin-right:9px}
+.bar nav a:hover{color:var(--ink)}
+
+/* twee rijen van twee vierkanten */
+.page{width:var(--W);margin:0 auto;padding:var(--g) 0 calc(var(--pad)*2);display:flex;flex-direction:column;gap:var(--g)}
+.row{display:grid;grid-template-columns:var(--s) var(--s);gap:var(--g)}
+.sq{width:var(--s);height:var(--s);min-width:0;min-height:0;position:relative}
+
+/* tekstvierkant */
+.txt{border:1px solid var(--hair);padding:calc(var(--s)*.05);display:flex;flex-direction:column;overflow:hidden}
+.hlogo{display:block;width:100%;height:auto}
+.lab{margin-top:calc(var(--s)*.07)}
+.title{font-weight:700;font-size:calc(var(--s)*.088);line-height:.9;letter-spacing:-.045em;text-transform:uppercase;margin-top:calc(var(--s)*.035)}
+.cols{display:grid;grid-template-columns:1fr 1fr;column-gap:calc(var(--s)*.03);font-size:12.5px;line-height:1.42;max-width:calc(var(--s)*.55);margin-top:calc(var(--s)*.035)}
+.strip{border-top:1px solid var(--ink);border-bottom:1px solid var(--hair);padding:6px 0 5px;display:flex;justify-content:space-between;gap:12px;margin-top:auto}
+#systeem .strip{margin:0 0 calc(var(--s)*.06)}
+#systeem .lab{margin-top:0}
+#woning .title,#systeem .title{margin-left:0}
+
+/* gevels: 2x2 vierkantjes in het vierkant */
+.comp{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:calc(var(--s)*.016)}
+.comp figure,.planbox{position:relative;overflow:hidden;background:#d9d7d0}
+.comp img{display:block;width:100%;height:100%;object-fit:cover}
+figcaption{position:absolute;left:0;top:0;background:var(--paper);padding:6px 9px 5px;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;line-height:1}
+.planbox{background:transparent;border:1px solid var(--hair)}
+.planbox img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;padding:4%}
+
+/* systeem-tekstvierkant */
+.spec{display:grid;grid-template-columns:auto 1fr;gap:4px 22px;margin-top:auto;padding-bottom:calc(var(--s)*.04)}
+.spec dt{color:var(--mute)}.spec dd{margin:0}
+.legend{display:flex;align-items:flex-end;gap:calc(var(--s)*.04)}
+.unit{width:calc(var(--s)*.27);aspect-ratio:1;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(10px,1.1vw,18px);flex:none}
+.unit .mono{color:#b9b6ad}
+.unit .n{font-weight:700;font-size:calc(var(--s)*.1);line-height:.8;letter-spacing:-.07em}
+.unit .n small{font-size:.3em;letter-spacing:-.02em;font-weight:500;margin-left:.1em}
+.sq1{display:inline-block;width:.8em;height:.8em;background:var(--paper);margin-right:.7em;vertical-align:-.05em}
+.crosswrap{display:grid;gap:12px}
+.cross{display:grid;grid-template-columns:repeat(3,var(--c));grid-template-rows:repeat(3,var(--c));--c:calc(var(--s)*.04);gap:3px;width:max-content}
+.cross i{background:var(--ink);display:block}.cross i.o{background:transparent}
+
+/* iPad staand: alle vierkanten onder elkaar, over de hele breedte */
+@media (max-aspect-ratio:1/1){
+  :root{--s:var(--W);--bar:52px}
+  .bar{grid-template-columns:auto 1fr}.bar>*:nth-child(2){display:none}
+  .row{grid-template-columns:var(--s);}
+  .title{font-size:calc(var(--s)*.1)}
+  .cols{max-width:calc(var(--s)*.6)}
+  .unit{width:calc(var(--s)*.3)}.unit .n{font-size:calc(var(--s)*.1)}
+  .cross{--c:calc(var(--s)*.04)}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

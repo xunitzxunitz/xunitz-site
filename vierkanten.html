@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>XUNITZ — Vier vierkanten</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/vierkanten.css">
+
+</head>
+<body>
+<header class="bar">
+  <span>XU-001 / Rev 01</span>
+  <span>Modulair woonsysteem</span>
+  <nav aria-label="Hoofdmenu">
+    <a href="#woning" aria-current="true">Woning</a>
+    <a href="#systeem">Systeem</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+
+<main class="page">
+
+  <section class="row" id="woning" aria-label="Woning">
+    <div class="sq txt">
+      <img class="hlogo" src="img/logo.svg" alt="XUNITZ">
+      <p class="lab mono mute">[ Woning ]</p>
+      <h1 class="title">Vier gevels,<br>één unit</h1>
+      <div class="cols">
+        <p>Dezelfde unit, vier gevelbeelden: noord, oost, zuid en west.</p>
+        <p>Fotografie van de gerealiseerde woning.</p>
+      </div>
+      <div class="strip mono"><span>XUNITZ Modulair woonsysteem 01/04</span><span>[ Gebouwd ]</span></div>
+    </div>
+    <div class="sq comp" role="group" aria-label="Vier gevels van de gebouwde woning">
+      <figure><img src="img/noord.jpg" alt="Noordgevel: groen gevelpaneel in een kader"><figcaption>N-01 Noord</figcaption></figure>
+      <figure><img src="img/oost.jpg" alt="Oostgevel: groot raam in een koperkleurig kader"><figcaption>O-02 Oost</figcaption></figure>
+      <figure><img src="img/west.jpg" alt="Westgevel: grijs gevelpaneel in een lichtblauw kader"><figcaption>W-04 West</figcaption></figure>
+      <figure><img src="img/zuid.jpg" alt="Zuidgevel: raam in een zwart kader"><figcaption>Z-03 Zuid</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="row" id="systeem" aria-label="Systeem">
+    <div class="sq txt">
+      <div class="strip mono"><span>Plattegrond 01/01</span><span>[ 5 units · 50 m² ]</span></div>
+      <p class="lab mono mute">[ Systeem ]</p>
+      <h2 class="title">Vijf units,<br>één kruis</h2>
+      <div class="cols">
+        <p>Wonen, werken, slapen en natte cel rond een open midden.</p>
+        <p>Elke arm is een unit van 10 m².</p>
+      </div>
+      <dl class="spec mono">
+        <dt>Unit</dt><dd>1</dd>
+        <dt>Maat</dt><dd>2,95 × 3,40 × 2,95 m</dd>
+        <dt>Inhoud</dt><dd>30 m³</dd>
+      </dl>
+      <div class="legend">
+        <div class="unit">
+          <span class="mono"><b class="sq1"></b>Unit</span>
+          <span class="n">10<small>m²</small></span>
+        </div>
+        <div class="crosswrap">
+          <div class="cross" aria-hidden="true"><i class="o"></i><i></i><i class="o"></i><i></i><i></i><i></i><i class="o"></i><i></i><i class="o"></i></div>
+          <p class="mono">5 units<br>50 m²</p>
+        </div>
+      </div>
+    </div>
+    <figure class="sq planbox">
+      <img src="img/plattegrond.png" alt="Kruisvormige plattegrond: wonen, werken en slapen rond een open midden">
+      <figcaption>Plattegrond</figcaption>
+    </figure>
+  </section>
+
+</main>
+<script>
+(function(){
+  var links=document.querySelectorAll('.bar nav a[href^="#"]:not([href="#"])');
+  var secs=[].map.call(links,function(a){return document.querySelector(a.getAttribute('href'))});
+  function mark(){var y=window.innerHeight*.45,cur=0;
+    secs.forEach(function(s,i){if(s.getBoundingClientRect().top<=y)cur=i});
+    links.forEach(function(a,i){if(i===cur)a.setAttribute('aria-current','true');else a.removeAttribute('aria-current')});}
+  window.addEventListener('scroll',mark,{passive:true});window.addEventListener('resize',mark);mark();
+})();
+</script>
+
+</body>
+</html>
