@@ -26,17 +26,11 @@
 <div class="stage home">
   <section class="txt">
     <img class="hlogo" src="img/logo.svg" alt="XUNITZ">
-    <p class="lab mono mute" style="margin-top:calc(var(--s)*.12)">[ Compact modulair wonen ]</p>
-    <h1 class="title indent" style="margin-top:calc(var(--s)*.04)">Bouw minder.<br>Maak meer<br>mogelijk.</h1>
-    <p class="lead indent" style="margin-top:calc(var(--s)*.05)">Eén systeem. Verschillende woningen.</p>
-    <div class="cols indent" style="margin-top:calc(var(--s)*.03)">
-      <p><b>Ontworpen. Gebouwd. Bewoond.</b></p>
-      <p>Fotografie van de referentiewoning: noord, oost, zuid en west.</p>
-    </div>
-    <div style="flex:1"></div>
+    <p class="lab mono mute">[ Compact modulair wonen ]</p>
+    <h1 class="title">Bouw minder.<br>Maak meer<br>mogelijk.</h1>
     <div class="strip mono"><span>001 / Referentiewoning</span><span>[ Gebouwd ]</span></div>
   </section>
-  <div class="vtext mono" aria-hidden="true" style="align-self:start"><span>XUNITZ — Modulair woonsysteem</span><span>[ 01 / 07 ]</span></div>
+  <div class="vtext mono" aria-hidden="true" style="align-self:start"><span>Eén systeem · Verschillende woningen</span><span>[ 01 / 07 ]</span></div>
   <div class="comp" role="group" aria-label="Vier gevels van de referentiewoning">
     <figure><img src="img/noord.jpg" alt="Noordgevel: groen gevelpaneel in een kader"><figcaption>N-01 Noord</figcaption></figure>
     <figure><img src="img/oost.jpg" alt="Oostgevel: groot raam in een koperkleurig kader"><figcaption>O-02 Oost</figcaption></figure>
@@ -212,6 +206,7 @@
 
 </main>
 <script>
+if(/[?&]raster\b/.test(location.search))document.documentElement.classList.add('toon-raster');
 (function(){
   var links=document.querySelectorAll('.bar nav a[href^="#"]:not([href="#"])');
   var secs=[].map.call(links,function(a){return document.querySelector(a.getAttribute('href'))});
