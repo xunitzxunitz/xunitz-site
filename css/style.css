@@ -33,8 +33,8 @@ a{color:inherit;text-decoration:none}
 .bar nav a:hover{color:var(--ink)}
 
 /* podium */
-.stage{display:grid;column-gap:var(--pad);padding:0 var(--pad);height:calc(var(--s) * 1.1)}
-.home{grid-template-columns:1fr 18px var(--s)}
+.stage{display:grid;column-gap:var(--pad);padding:0 var(--pad);min-height:calc(var(--s) * 1.1)}
+.home,.scene{grid-template-columns:1fr 18px var(--s)}
 .sys{grid-template-columns:1fr 18px var(--s)}
 
 .txt{display:flex;flex-direction:column;min-height:0}
@@ -83,7 +83,7 @@ a{color:inherit;text-decoration:none}
   .bar>*:nth-child(2){display:none}
   .stage{height:auto;grid-template-columns:1fr !important;row-gap:28px;padding-bottom:28px}
   .vtext{display:none}
-  .home .txt{order:1}.home .comp{order:2;align-self:auto}
+  .home .txt,.scene .txt{order:1}.home .comp,.scene .comp,.scene .planbox,.scene .unitbox,.scene .anat{order:2;align-self:auto}
   .sys .txt{order:2}.sys .planbox{order:1}
   .title{font-size:calc(var(--s)*.12)}
   .cols{max-width:none}
@@ -91,3 +91,33 @@ a{color:inherit;text-decoration:none}
   .unit .n{font-size:calc(var(--s)*.22)}
   .txt{gap:28px}
 }
+
+/* werkmethodiek 07: aanvullende onderdelen */
+.lead{font-size:clamp(17px,1.5vw,22px);line-height:1.3;font-weight:500}
+.ph{position:relative;background:#e9e6de;border:1px dashed rgba(11,11,11,.35);display:flex;align-items:flex-end;padding:12px;box-sizing:border-box}
+.ph span{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;line-height:1.5}
+.ph .tagx{border-bottom:1px solid var(--hair)}
+.mini{display:grid;grid-template-columns:repeat(3,14px);grid-template-rows:repeat(3,14px);gap:2px;margin-bottom:auto}
+.mini i{background:var(--ink)}.mini i.o{background:transparent}
+.anat{align-self:start;width:var(--s);height:var(--s);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:calc(var(--s)*.012)}
+.anat div{border:1px solid var(--ink);display:flex;align-items:flex-end;padding:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+.anat .k{background:var(--ink);color:var(--paper)}
+.anat .o{border:0}
+.unitbox{align-self:end;width:var(--s);height:var(--s);background:var(--ink);color:var(--paper);display:flex;flex-direction:column;justify-content:space-between;padding:clamp(18px,2vw,32px);box-sizing:border-box}
+.unitbox .n{font-weight:700;font-size:calc(var(--s)*.32);line-height:.8;letter-spacing:-.07em}
+.unitbox .mono{color:#cfccc3}
+.status{display:grid;grid-template-columns:auto 1fr;gap:6px 22px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;line-height:1.6}
+.status dt{color:var(--mute)}.status dd{margin:0}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--paper);padding:15px 22px;font-weight:700;font-size:15px;min-height:44px;box-sizing:border-box}
+.btn:hover{background:#2a2a28}
+@media (max-width:600px){
+  .cols{grid-template-columns:1fr;row-gap:12px}
+  .bar nav{gap:14px}
+  .bar>span:first-child{display:none}
+  .bar{grid-template-columns:1fr}
+  .indent{padding-left:0}
+  .legend{flex-wrap:wrap}
+  .strip{flex-wrap:wrap;row-gap:2px}
+}
+@media (max-aspect-ratio:1/1){.stage{min-height:0}.unitbox,.anat{width:100%;height:auto;aspect-ratio:1}}
