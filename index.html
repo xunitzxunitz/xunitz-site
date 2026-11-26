@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>XUNITZ — Compact modulair wonen</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261126-1850">
+<link rel="stylesheet" href="css/style.css?v=20261126-1910">
 </head>
 <body>
 <main>
@@ -24,12 +24,13 @@
   <section class="o-p o-t1">
     <p class="o-pos">Compact modulair wonen</p>
     <h1 class="o-kop"><span>Bouw minder.</span><span>Maak meer</span><span>mogelijk.</span></h1>
+    <div class="o-groot" id="o-groot" hidden><img alt=""><button class="o-sluit" type="button" aria-label="Foto sluiten">×</button></div>
   </section>
-  <div class="o-gevels" role="group" aria-label="Vier gevels van de referentiewoning">
-    <figure><img src="img/noord.jpg" alt="Noordgevel: groen gevelpaneel in een kader"><figcaption class="mono">N-01 Noord</figcaption></figure>
-    <figure><img src="img/oost.jpg" alt="Oostgevel: groot raam in een koperkleurig kader"><figcaption class="mono">O-02 Oost</figcaption></figure>
-    <figure><img src="img/west.jpg" alt="Westgevel: grijs gevelpaneel in een lichtblauw kader"><figcaption class="mono">W-04 West</figcaption></figure>
-    <figure><img src="img/zuid.jpg" alt="Zuidgevel: raam in een zwart kader"><figcaption class="mono">Z-03 Zuid</figcaption></figure>
+  <div class="o-gevels" role="group" aria-label="Vier gevels van de referentiewoning — klik voor de originele foto">
+    <button class="o-gevel" type="button" data-groot="img/gevels/noord.jpg" data-naam="Noordgevel"><img src="img/noord.jpg" alt="Noordgevel: groen gevelpaneel in een kader"><span class="o-l o-l-n mono" aria-hidden="true">N</span></button>
+    <button class="o-gevel" type="button" data-groot="img/gevels/oost.jpg" data-naam="Oostgevel"><img src="img/oost.jpg" alt="Oostgevel: groot raam in een koperkleurig kader"><span class="o-l o-l-o mono" aria-hidden="true">O</span></button>
+    <button class="o-gevel" type="button" data-groot="img/gevels/west.jpg" data-naam="Westgevel"><img src="img/west.jpg" alt="Westgevel: grijs gevelpaneel in een lichtblauw kader"><span class="o-l o-l-w mono" aria-hidden="true">W</span></button>
+    <button class="o-gevel" type="button" data-groot="img/gevels/zuid.jpg" data-naam="Zuidgevel"><img src="img/zuid.jpg" alt="Zuidgevel: raam in een zwart kader"><span class="o-l o-l-z mono" aria-hidden="true">Z</span></button>
   </div>
   <div class="o-strip mono"><span>001 / Referentiewoning</span><span>[ Gebouwd ]</span></div>
 </div>
@@ -235,6 +236,27 @@ if(/[?&]raster\b/.test(location.search))document.documentElement.classList.add('
   knop.addEventListener('click',function(){var o=knop.getAttribute('aria-expanded')!=='true';knop.setAttribute('aria-expanded',String(o));lijst.classList.toggle('open',o)});
   lijst.addEventListener('click',dicht);
   if('IntersectionObserver' in window){new IntersectionObserver(function(e){var uit=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;knop.classList.toggle('aan',uit);if(!uit)dicht()}).observe(menu)}else knop.classList.add('aan');
+})();
+// opening: gevel aanklikken → originele foto uitgevuld in het vlak van Bouw minder
+(function(){
+  var vlak=document.getElementById('o-groot');if(!vlak)return;
+  var img=vlak.querySelector('img'),sluit=vlak.querySelector('.o-sluit'),actief=null;
+  function dicht(){vlak.hidden=true;img.removeAttribute('src');if(actief){actief.setAttribute('aria-pressed','false');actief.focus();actief=null}}
+  [].forEach.call(document.querySelectorAll('.o-gevel'),function(b){
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){
+      if(actief)actief.setAttribute('aria-pressed','false');
+      actief=b;b.setAttribute('aria-pressed','true');
+      var klein=b.querySelector('img').getAttribute('src');
+      img.onerror=function(){img.onerror=null;img.src=klein};  /* origineel nog niet aanwezig: toon de gevelfoto */
+      img.src=b.getAttribute('data-groot');img.alt=b.getAttribute('data-naam')+' — originele foto';
+      vlak.hidden=false;
+      var r=vlak.getBoundingClientRect();if(r.top<0||r.bottom>innerHeight)vlak.scrollIntoView({behavior:'smooth',block:'center'});
+      sluit.focus();
+    });
+  });
+  sluit.addEventListener('click',dicht);
+  addEventListener('keydown',function(e){if(e.key==='Escape'&&!vlak.hidden)dicht()});
 })();
 // opening: drie scrollstappen — Ontworpen (lijn), Gebouwd (muren), Bewoond (inrichting)
 (function(){
