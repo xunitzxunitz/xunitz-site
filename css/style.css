@@ -161,10 +161,14 @@ a{color:inherit;text-decoration:none}
 .o-p{margin:calc(var(--g) / 2);padding:calc(var(--q) * .14);position:relative;min-width:0}
 .o-kop{font-family:var(--display);font-weight:700;font-feature-settings:"ss05" 1,"ss06" 1,"ss07" 1,"ss08" 1;text-transform:uppercase;letter-spacing:-.06em;line-height:.9;white-space:nowrap;font-size:calc(var(--q) * .42)}
 .o-kop span{display:block}
-.o-logo{grid-column:1 / 5;grid-row:1;background:#fff;display:flex;align-items:center}
-.o-logo img{height:calc(var(--q) * .3);width:auto;max-width:100%}
-.o-menu{grid-row:1;background:#fff;display:flex;flex-direction:column;justify-content:space-between;transition:background .2s,color .2s}
-.o-menu b{font-family:var(--display);font-weight:700;font-size:calc(var(--q) * .115);letter-spacing:-.03em;text-transform:uppercase}
+.o-logo{grid-column:1 / 5;grid-row:1;display:flex;align-items:center}
+.o-logo img{height:calc(var(--q) * .2);width:auto;max-width:100%}
+/* menuvak = 2 × 2 kleine vakken: cijfer linksboven, woord linksonder */
+.o-menu{grid-row:1;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;transition:background .2s,color .2s;
+  background-image:linear-gradient(to right,transparent calc(50% - .5px),rgba(11,11,11,.12) calc(50% - .5px),rgba(11,11,11,.12) calc(50% + .5px),transparent calc(50% + .5px)),linear-gradient(to bottom,transparent calc(50% - .5px),rgba(11,11,11,.12) calc(50% - .5px),rgba(11,11,11,.12) calc(50% + .5px),transparent calc(50% + .5px))}
+.o-menu>*{padding:calc(var(--q) * .06)}
+.o-menu span{grid-column:1;grid-row:1}
+.o-menu b{grid-column:1;grid-row:2;align-self:end;white-space:nowrap;font-family:var(--display);font-weight:700;font-size:calc(var(--q) * .063);letter-spacing:-.03em;text-transform:uppercase}
 .o-menu:hover{background:var(--ink);color:var(--paper)}
 .o-m1{grid-column:5}.o-m2{grid-column:6}.o-m3{grid-column:7}
 .o-t1{grid-column:1 / 5;grid-row:2 / 5;background:#e9e6dc;display:flex;flex-direction:column;justify-content:space-between}
@@ -194,7 +198,8 @@ a{color:inherit;text-decoration:none}
   .opening{--cols:4}
   .o-m1{grid-column:1}.o-m2{grid-column:2}.o-m3{grid-column:3}
   .o-menu{grid-row:2}
-  .o-menu b{font-size:calc(var(--q) * .15)}
+  .o-menu{background-image:linear-gradient(to bottom,transparent calc(50% - .5px),rgba(11,11,11,.12) calc(50% - .5px),rgba(11,11,11,.12) calc(50% + .5px),transparent calc(50% + .5px))}
+  .o-menu b{grid-column:1 / 3;font-size:calc(var(--q) * .13)} /* iPhone: woord over de onderste twee vakken */
   .o-t1{grid-column:1 / 5;grid-row:3 / 6}
   .o-gevels{grid-column:1 / 5;grid-row:6 / 10}
   .o-strip{grid-column:1 / 5;grid-row:10}
