@@ -133,10 +133,7 @@ a{color:inherit;text-decoration:none}
    Rij 1: logo (4) + menu (3) · rij 2–4: kop + gevels ·
    daarna blijft "Ontworpen" + plattegrond staan voor 3 scrollstappen.
    ========================================================= */
-.opening{position:relative;--cols:7;--q:calc((100vw - 2 * var(--pad)) / var(--cols));--g:calc(var(--q) * .04);
-  background-image:linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px);
-  background-size:var(--q) var(--q),var(--q) var(--q),100% 1px,calc(var(--q) / 2) calc(var(--q) * .5);background-repeat:repeat,repeat,no-repeat,repeat-x;
-  background-position:var(--pad) calc(var(--q) * .5),var(--pad) calc(var(--q) * .5),0 0,var(--pad) 0} /* rij 1: vierkantjes van een half vak over de volle breedte */ /* raster tot de bovenrand: extra lijn langs de bovenkant */
+.opening{position:relative;z-index:0;--cols:7;--q:calc((100vw - 2 * var(--pad)) / var(--cols));--g:calc(var(--q) * .04);--y0:calc(var(--q) * .5)}
 .o-r{display:grid;grid-template-columns:repeat(var(--cols),var(--q));grid-auto-rows:var(--q);padding:0 var(--pad)}
 .o-top{grid-template-rows:calc(var(--q) * .5)}
 html{scroll-padding-top:0}
@@ -154,7 +151,7 @@ html{scroll-padding-top:0}
 .o-menu b{grid-column:1;grid-row:1;align-self:end;white-space:nowrap;font-family:var(--display);font-weight:400;font-size:calc(var(--q) * .063);letter-spacing:-.03em;text-transform:uppercase}
 .o-menu:hover{background:var(--ink);color:var(--paper)}
 .o-m1{grid-column:5}.o-m2{grid-column:6}.o-m3{grid-column:7}
-.o-t1{grid-column:1 / 5;grid-row:2 / 5;margin:0;background:rgba(11,11,11,.025);padding:calc(var(--q) * .14 + var(--g) / 2);display:flex;flex-direction:column;justify-content:space-between}
+.o-t1{grid-column:1 / 5;grid-row:2 / 5;margin:0;background:#eeebe3;padding:calc(var(--q) * .14 + var(--g) / 2);display:flex;flex-direction:column;justify-content:space-between}
 .o-gevels{grid-column:5 / 8;grid-row:2 / 5;margin:calc(var(--g) / 2);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:var(--g)}
 .o-gevels figure{position:relative;overflow:hidden;background:#d9d7d0}
 .o-gevels img{width:100%;height:100%;object-fit:cover;display:block}
@@ -172,10 +169,7 @@ html{scroll-padding-top:0}
 .o-plan img.aan{opacity:1}
 .o-lab{position:absolute;left:calc(var(--q) * .14);top:calc(var(--q) * .14);z-index:1}
 @media (max-width:899px){
-  .opening{--cols:4;
-    background-image:linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px);
-    background-size:var(--q) var(--q),var(--q) var(--q),100% 1px,calc(var(--q) / 2) calc(var(--q) * .5),100% 1px;background-repeat:repeat,repeat,no-repeat,repeat-x,no-repeat;
-    background-position:var(--pad) 0,var(--pad) 0,0 0,var(--pad) 0,0 calc(var(--q) * .5)} /* iPhone: vierkantjes alleen in de logorij; menurij zonder deellijnen */
+  .opening{--cols:4;--y0:0px}
   .o-top{grid-template-rows:calc(var(--q) * .5) calc(var(--q) * .5)} /* logo en menu samen één vak */
   .o-m1{grid-column:1}.o-m2{grid-column:2}.o-m3{grid-column:3}
   .o-menu{grid-row:2}
@@ -212,8 +206,51 @@ html{scroll-padding-top:0}
 .o-lijst a+a{border-top:1px solid rgba(11,11,11,.12)}
 .o-lijst a:hover{background:var(--ink);color:var(--paper)}
 
-/* fijn raster in rij 1, vak 1–4: alleen de lijnen ertussen (kwart vak), zodat er nooit twee lijnen naast elkaar liggen */
-.o-fijn{position:absolute;left:var(--pad);top:0;width:calc(var(--q) * 4);height:calc(var(--q) * .5);pointer-events:none;
-  background-image:linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px);
-  background-size:calc(var(--q) / 2) 100%,100% 100%;background-repeat:repeat-x,no-repeat;
-  background-position:calc(var(--q) / 4) 0,0 calc(var(--q) / 4)}
+
+
+/* =========================================================
+   RASTER (opening) — één laag, zonder herhaalde tegels.
+   Alle lijnen komen uit repeating-linear-gradients binnen één vlak,
+   zodat afrondingen niet kunnen verschuiven en er nooit twee lijnen
+   naast elkaar ontstaan. Elke lijn wordt maar één keer getekend.
+   ========================================================= */
+.o-raster{--l:rgba(11,11,11,.07);position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background-image:
+    /* 1 verticaal, elk vak */
+    repeating-linear-gradient(to right,var(--l) 0 1px,transparent 1px var(--q)),
+    /* 2 horizontaal, elk vak, vanaf de onderkant van rij 1 */
+    repeating-linear-gradient(to bottom,var(--l) 0 1px,transparent 1px var(--q)),
+    /* 3 bovenrand */
+    linear-gradient(var(--l),var(--l)),
+    /* 4 rij 1: halve vakken (alleen de tussenlijnen) */
+    repeating-linear-gradient(to right,transparent 0 calc(var(--q) / 2),var(--l) calc(var(--q) / 2) calc(var(--q) / 2 + 1px),transparent calc(var(--q) / 2 + 1px) var(--q)),
+    /* 5 rij 1, vak 1–4: kwart vakken (alleen de tussenlijnen) */
+    repeating-linear-gradient(to right,transparent 0 calc(var(--q) / 4),var(--l) calc(var(--q) / 4) calc(var(--q) / 4 + 1px),transparent calc(var(--q) / 4 + 1px) calc(var(--q) / 2)),
+    /* 6 rij 1, vak 1–4: horizontale kwartlijn */
+    linear-gradient(to bottom,transparent calc(var(--q) / 4),var(--l) calc(var(--q) / 4) calc(var(--q) / 4 + 1px),transparent calc(var(--q) / 4 + 1px));
+  background-repeat:no-repeat;
+  background-size:
+    calc(100% - var(--pad)) 100%,
+    100% calc(100% - var(--y0)),
+    100% 1px,
+    calc(100% - var(--pad)) calc(var(--q) * .5),
+    calc(var(--q) * 4) calc(var(--q) * .5),
+    calc(var(--q) * 4) calc(var(--q) * .5);
+  background-position:
+    var(--pad) 0,
+    0 var(--y0),
+    0 0,
+    var(--pad) 0,
+    var(--pad) 0,
+    var(--pad) 0}
+@media (max-width:899px){
+  /* iPhone: lijn tussen logorij en menurij erbij */
+  .o-raster{background-image:
+    repeating-linear-gradient(to right,var(--l) 0 1px,transparent 1px var(--q)),
+    repeating-linear-gradient(to bottom,var(--l) 0 1px,transparent 1px var(--q)),
+    linear-gradient(to bottom,transparent calc(var(--q) * .5),var(--l) calc(var(--q) * .5) calc(var(--q) * .5 + 1px),transparent calc(var(--q) * .5 + 1px)),
+    repeating-linear-gradient(to right,transparent 0 calc(var(--q) / 2),var(--l) calc(var(--q) / 2) calc(var(--q) / 2 + 1px),transparent calc(var(--q) / 2 + 1px) var(--q)),
+    repeating-linear-gradient(to right,transparent 0 calc(var(--q) / 4),var(--l) calc(var(--q) / 4) calc(var(--q) / 4 + 1px),transparent calc(var(--q) / 4 + 1px) calc(var(--q) / 2)),
+    linear-gradient(to bottom,transparent calc(var(--q) / 4),var(--l) calc(var(--q) / 4) calc(var(--q) / 4 + 1px),transparent calc(var(--q) / 4 + 1px));
+    background-size:calc(100% - var(--pad)) 100%,100% 100%,100% var(--q),calc(100% - var(--pad)) calc(var(--q) * .5),calc(var(--q) * 4) calc(var(--q) * .5),calc(var(--q) * 4) calc(var(--q) * .5)}
+}
