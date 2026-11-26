@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>XUNITZ — Compact modulair wonen</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261127-0005">
+<link rel="stylesheet" href="css/style.css?v=20261127-0010">
 </head>
 <body>
 <main>
@@ -267,9 +267,11 @@ if(/[?&]raster\b/.test(location.search))document.documentElement.classList.add('
     var r=blok.getBoundingClientRect(),lengte=Math.max(1,blok.offsetHeight-innerHeight);
     var p=Math.min(1,Math.max(0,-r.top/lengte));
     var n=r.top<innerHeight*.6?(p<.2?1:p<.45?2:p<.7?3:4):0;
-    if(vlak)vlak.classList.toggle('aan',n===1);
+    if(vlak)vlak.classList.toggle('aan',n<=1);  /* zwart vlak vanaf het begin */
     [].forEach.call(regels,function(s,i){s.classList.toggle('aan',i<n-1)});
-    [].forEach.call(lagen,function(l,i){l.classList.toggle('aan',i<n-1)});
+    /* lagen: 0 lijn (niet meer gebruikt), 1 muren vanaf Ontworpen, 2 inrichting bij Bewoond */
+    if(lagen[1])lagen[1].classList.toggle('aan',n>=2);
+    if(lagen[2])lagen[2].classList.toggle('aan',n>=4);
   }
   addEventListener('scroll',stap,{passive:true});addEventListener('resize',stap);stap();
 })();

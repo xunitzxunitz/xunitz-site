@@ -182,7 +182,7 @@ html{scroll-padding-top:0}
 .o-plan{grid-column:5 / 8;grid-row:1 / 4;background:var(--paper)}
 .o-plan img{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;opacity:0;transition:opacity .6s}
 .o-plan img.aan{opacity:1}
-.o-lab{position:absolute;left:calc(var(--q) * .14);top:calc(var(--q) * .14);z-index:1}
+.o-lab{position:absolute;left:calc(var(--q) * .14);bottom:calc(var(--q) * .14);z-index:1} /* onder in het vak */
 @media (max-width:899px){
   .opening{--cols:4;--y0:0px}
   .o-top{grid-template-rows:calc(var(--q) * .5) calc(var(--q) * .5)} /* logo en menu samen één vak */
@@ -199,7 +199,7 @@ html{scroll-padding-top:0}
   .o-plan{grid-column:1 / 5;grid-row:4 / 8}
   .o-plak{top:calc(100vh - var(--q) * 7 - 10px)}
 }
-@media (prefers-reduced-motion:reduce){.o-t2 .o-kop span,.o-plan img{opacity:1;transform:none;transition:none}.o-plan .o-vlak{display:none}}
+@media (prefers-reduced-motion:reduce){.o-t2 .o-kop span,.o-plan img{opacity:1;transform:none;transition:none}}
 
 /* 02 — één module op referentiemaat (vervangt de herhaalde plattegrond) */
 .modbox{display:flex;align-items:center;justify-content:center}
