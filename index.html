@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>XUNITZ — Compact modulair wonen</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261126-2355">
+<link rel="stylesheet" href="css/style.css?v=20261127-0005">
 </head>
 <body>
 <main>
@@ -42,6 +42,7 @@
     </section>
     <div class="o-p o-plan">
       <p class="o-lab mono">Plattegrond · 5 modules</p>
+      <img class="o-vlak" src="img/schets/plat-0-vlak.png" alt="">
       <img src="img/schets/plat-1-lijn.png" alt="">
       <img src="img/schets/plat-2-muren.png" alt="">
       <img src="img/schets/plat-3-inrichting.png" alt="Plattegrond van de referentiewoning">
@@ -258,16 +259,17 @@ if(/[?&]raster\b/.test(location.search))document.documentElement.classList.add('
   sluit.addEventListener('click',dicht);
   addEventListener('keydown',function(e){if(e.key==='Escape'&&!vlak.hidden)dicht()});
 })();
-// opening: drie scrollstappen — Ontworpen (lijn), Gebouwd (muren), Bewoond (inrichting)
+// opening: vier scrollstappen — eerst de 5 units als gesloten zwart vlak, dan Ontworpen (lijn), Gebouwd (muren), Bewoond (inrichting)
 (function(){
   var blok=document.getElementById('o-stappen');if(!blok)return;
-  var regels=blok.querySelectorAll('.o-t2 .o-kop span'),lagen=blok.querySelectorAll('.o-plan img');
+  var regels=blok.querySelectorAll('.o-t2 .o-kop span'),vlak=blok.querySelector('.o-plan .o-vlak'),lagen=blok.querySelectorAll('.o-plan img:not(.o-vlak)');
   function stap(){
     var r=blok.getBoundingClientRect(),lengte=Math.max(1,blok.offsetHeight-innerHeight);
     var p=Math.min(1,Math.max(0,-r.top/lengte));
-    var n=r.top<innerHeight*.6?(p<.25?1:p<.55?2:3):0;
-    [].forEach.call(regels,function(s,i){s.classList.toggle('aan',i<n)});
-    [].forEach.call(lagen,function(l,i){l.classList.toggle('aan',i<n)});
+    var n=r.top<innerHeight*.6?(p<.2?1:p<.45?2:p<.7?3:4):0;
+    if(vlak)vlak.classList.toggle('aan',n===1);
+    [].forEach.call(regels,function(s,i){s.classList.toggle('aan',i<n-1)});
+    [].forEach.call(lagen,function(l,i){l.classList.toggle('aan',i<n-1)});
   }
   addEventListener('scroll',stap,{passive:true});addEventListener('resize',stap);stap();
 })();
