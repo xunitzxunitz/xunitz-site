@@ -173,7 +173,7 @@ html{scroll-padding-top:0}
 .o-sluit::after{content:"";position:absolute;right:0;bottom:0;width:max(100%,44px);height:max(100%,44px)} /* onzichtbaar aanraakvlak van minimaal 44 px */
 .o-strip{grid-column:7;grid-row:2 / 5;justify-self:end;margin:calc(var(--g) / 2) 0;writing-mode:vertical-rl;display:flex;justify-content:space-between;white-space:nowrap;transform:translateX(calc(100% + 6px))} /* verticaal langs de gevels, in de marge */
 /* tweede scherm: half vak ruimte na de strip, daarna 3 scrollstappen */
-.o-scroll{height:calc(var(--q) * 3 + 100vh);margin-top:var(--q)}
+.o-scroll{height:calc(var(--q) * 3 + 100vh);margin-top:0} /* geen lege rij onder de gevels */
 .o-plak{position:sticky;top:calc(50vh - var(--q) * 1.5 + var(--bar) / 2)}
 .o-t2{grid-column:1 / 5;grid-row:1 / 4;background:var(--paper);display:flex;flex-direction:column;justify-content:space-between;padding-left:calc(var(--q) * .2086 - var(--g) / 2)}
 .o-t2 .o-kop{font-size:calc(var(--q) * .42 * .6)} /* bewijsregel: 60 % van de kop */
@@ -194,7 +194,7 @@ html{scroll-padding-top:0}
   .o-strip{grid-column:4;grid-row:6 / 10;line-height:1;transform:translateX(calc(100% + 4px))}
   .o-kop{font-size:calc(var(--q) * .36)}
   .o-t2 .o-kop{font-size:calc(var(--q) * .36 * .6)}
-  .o-scroll{height:calc(var(--q) * 7 + 100vh);margin-top:var(--q)}
+  .o-scroll{height:calc(var(--q) * 7 + 100vh);margin-top:0}
   .o-t2{grid-column:1 / 5;grid-row:1 / 4}
   .o-plan{grid-column:1 / 5;grid-row:4 / 8}
   .o-plak{top:calc(100vh - var(--q) * 7 - 10px)}
