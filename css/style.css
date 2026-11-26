@@ -134,26 +134,26 @@ a{color:inherit;text-decoration:none}
    daarna blijft "Ontworpen" + plattegrond staan voor 3 scrollstappen.
    ========================================================= */
 .opening{--cols:7;--q:calc((100vw - 2 * var(--pad)) / var(--cols));--g:calc(var(--q) * .04);
-  background-image:linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px);
-  background-size:var(--q) var(--q),var(--q) var(--q),100% 1px;background-repeat:repeat,repeat,no-repeat;
-  background-position:var(--pad) calc(var(--q) * .5),var(--pad) calc(var(--q) * .5),0 0} /* raster tot de bovenrand: extra lijn langs de bovenkant */
+  background-image:linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px);
+  background-size:var(--q) var(--q),var(--q) var(--q),100% 1px,calc(var(--q) / 2) calc(var(--q) * .5);background-repeat:repeat,repeat,no-repeat,repeat-x;
+  background-position:var(--pad) calc(var(--q) * .5),var(--pad) calc(var(--q) * .5),0 0,var(--pad) 0} /* rij 1: vierkantjes van een half vak over de volle breedte */ /* raster tot de bovenrand: extra lijn langs de bovenkant */
 .o-r{display:grid;grid-template-columns:repeat(var(--cols),var(--q));grid-auto-rows:var(--q);padding:0 var(--pad)}
 .o-top{grid-template-rows:calc(var(--q) * .5)}
 html{scroll-padding-top:0}
 .o-p{margin:calc(var(--g) / 2);padding:calc(var(--q) * .14);position:relative;min-width:0}
 .o-kop{font-family:var(--display);font-weight:700;font-feature-settings:"ss05" 1,"ss06" 1,"ss07" 1,"ss08" 1;text-transform:uppercase;letter-spacing:-.06em;line-height:.9;white-space:nowrap;font-size:calc(var(--q) * .42)}
 .o-kop span{display:block}
-.o-logo{grid-column:1 / 3;grid-row:1;display:flex;align-items:center;background:var(--paper)} /* 2 vakken verbonden: dekt de rasterlijn ertussen af */
-.o-logo img{height:calc(var(--q) * .2);width:auto;max-width:100%}
+.o-logo{grid-column:1 / 3;grid-row:1;display:flex;align-items:center;padding:0 0 0 calc(var(--q) * .312)}
+/* logo op het raster: deellijnen vallen tussen × | UNI | TZ (precies 4 vierkantjes kan niet met deze letterafstanden) */
+.o-logo img{width:calc(var(--q) * 1.0444);height:auto;max-width:none}
 /* menuvak = 2 kleine vakken naast elkaar: cijfer en woord in het linker vak */
-.o-menu{grid-row:1;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr;transition:background .2s,color .2s;
-  background-image:linear-gradient(to right,transparent calc(50% - .5px),rgba(11,11,11,.12) calc(50% - .5px),rgba(11,11,11,.12) calc(50% + .5px),transparent calc(50% + .5px))}
+.o-menu{grid-row:1;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr;transition:background .2s,color .2s;}
 .o-menu>*{padding:calc(var(--q) * .06)}
 .o-menu span{grid-column:1;grid-row:1}
 .o-menu b{grid-column:1;grid-row:1;align-self:end;white-space:nowrap;font-family:var(--display);font-weight:400;font-size:calc(var(--q) * .063);letter-spacing:-.03em;text-transform:uppercase}
 .o-menu:hover{background:var(--ink);color:var(--paper)}
 .o-m1{grid-column:5}.o-m2{grid-column:6}.o-m3{grid-column:7}
-.o-t1{grid-column:1 / 5;grid-row:2 / 5;background:var(--paper);display:flex;flex-direction:column;justify-content:space-between}
+.o-t1{grid-column:1 / 5;grid-row:2 / 5;background:#eeebe3;display:flex;flex-direction:column;justify-content:space-between}
 .o-gevels{grid-column:5 / 8;grid-row:2 / 5;margin:calc(var(--g) / 2);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:var(--g)}
 .o-gevels figure{position:relative;overflow:hidden;background:#d9d7d0}
 .o-gevels img{width:100%;height:100%;object-fit:cover;display:block}
@@ -162,20 +162,22 @@ html{scroll-padding-top:0}
 /* tweede scherm: half vak ruimte na de strip, daarna 3 scrollstappen */
 .o-scroll{height:calc(var(--q) * 3 + 100vh);margin-top:var(--q)}
 .o-plak{position:sticky;top:calc(50vh - var(--q) * 1.5 + var(--bar) / 2)}
-.o-t2{grid-column:1 / 5;grid-row:1 / 4;background:#fff;display:flex;flex-direction:column;justify-content:space-between}
+.o-t2{grid-column:1 / 5;grid-row:1 / 4;background:var(--paper);display:flex;flex-direction:column;justify-content:space-between}
 .o-t2 .o-kop{font-size:calc(var(--q) * .42 * .6)} /* bewijsregel: 60 % van de kop */
 .o-t2 .o-kop span{opacity:0;transform:translateY(.25em);transition:opacity .5s,transform .5s}
 .o-t2 .o-kop span.aan{opacity:1;transform:none}
-.o-plan{grid-column:5 / 8;grid-row:1 / 4;background:#fff}
+.o-plan{grid-column:5 / 8;grid-row:1 / 4;background:var(--paper)}
 .o-plan img{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;opacity:0;transition:opacity .6s}
 .o-plan img.aan{opacity:1}
 .o-lab{position:absolute;left:calc(var(--q) * .14);top:calc(var(--q) * .14);z-index:1}
 @media (max-width:899px){
-  .opening{--cols:4;background-position:var(--pad) 0,var(--pad) 0,0 0}
+  .opening{--cols:4;
+    background-image:linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px);
+    background-size:var(--q) var(--q),var(--q) var(--q),100% 1px,calc(var(--q) / 2) calc(var(--q) * .5),100% 1px;background-repeat:repeat,repeat,no-repeat,repeat-x,no-repeat;
+    background-position:var(--pad) 0,var(--pad) 0,0 0,var(--pad) 0,0 calc(var(--q) * .5)} /* iPhone: vierkantjes alleen in de logorij; menurij zonder deellijnen */
   .o-top{grid-template-rows:calc(var(--q) * .5) calc(var(--q) * .5)} /* logo en menu samen één vak */
   .o-m1{grid-column:1}.o-m2{grid-column:2}.o-m3{grid-column:3}
   .o-menu{grid-row:2}
-  .o-menu{background-image:none}
   .o-menu b{grid-column:1 / 3;font-size:calc(var(--q) * .13)} /* iPhone: woord over beide kleine vakken */
   .o-t1{grid-column:1 / 5;grid-row:3 / 6}
   .o-gevels{grid-column:1 / 5;grid-row:6 / 10}
