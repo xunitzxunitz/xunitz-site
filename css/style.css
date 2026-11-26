@@ -161,14 +161,14 @@ a{color:inherit;text-decoration:none}
 .o-p{margin:calc(var(--g) / 2);padding:calc(var(--q) * .14);position:relative;min-width:0}
 .o-kop{font-family:var(--display);font-weight:700;font-feature-settings:"ss05" 1,"ss06" 1,"ss07" 1,"ss08" 1;text-transform:uppercase;letter-spacing:-.06em;line-height:.9;white-space:nowrap;font-size:calc(var(--q) * .42)}
 .o-kop span{display:block}
-.o-logo{grid-column:1 / 5;grid-row:1;display:flex;align-items:center}
+.o-logo{grid-column:1 / 3;grid-row:1;display:flex;align-items:center;background:var(--paper)} /* 2 vakken verbonden: dekt de rasterlijn ertussen af */
 .o-logo img{height:calc(var(--q) * .2);width:auto;max-width:100%}
 /* menuvak = 2 × 2 kleine vakken: cijfer linksboven, woord linksonder */
 .o-menu{grid-row:1;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;transition:background .2s,color .2s;
   background-image:linear-gradient(to right,transparent calc(50% - .5px),rgba(11,11,11,.12) calc(50% - .5px),rgba(11,11,11,.12) calc(50% + .5px),transparent calc(50% + .5px)),linear-gradient(to bottom,transparent calc(50% - .5px),rgba(11,11,11,.12) calc(50% - .5px),rgba(11,11,11,.12) calc(50% + .5px),transparent calc(50% + .5px))}
 .o-menu>*{padding:calc(var(--q) * .06)}
 .o-menu span{grid-column:1;grid-row:1}
-.o-menu b{grid-column:1;grid-row:2;align-self:end;white-space:nowrap;font-family:var(--display);font-weight:700;font-size:calc(var(--q) * .063);letter-spacing:-.03em;text-transform:uppercase}
+.o-menu b{grid-column:1;grid-row:1;align-self:end;white-space:nowrap;font-family:var(--display);font-weight:700;font-size:calc(var(--q) * .063);letter-spacing:-.03em;text-transform:uppercase}
 .o-menu:hover{background:var(--ink);color:var(--paper)}
 .o-m1{grid-column:5}.o-m2{grid-column:6}.o-m3{grid-column:7}
 .o-t1{grid-column:1 / 5;grid-row:2 / 5;background:#e9e6dc;display:flex;flex-direction:column;justify-content:space-between}
@@ -176,9 +176,9 @@ a{color:inherit;text-decoration:none}
 .o-gevels figure{position:relative;overflow:hidden;background:#d9d7d0}
 .o-gevels img{width:100%;height:100%;object-fit:cover;display:block}
 .o-gevels figcaption{position:absolute;left:0;top:0;background:var(--paper);padding:5px 8px 4px}
-.o-strip{grid-column:5 / 8;grid-row:5;align-self:start;display:flex;justify-content:space-between;margin:var(--g) calc(var(--g) / 2) 0;border-bottom:1px solid var(--hair);padding-bottom:6px}
+.o-strip{grid-column:7;grid-row:2 / 5;justify-self:end;margin:calc(var(--g) / 2) 0;writing-mode:vertical-rl;display:flex;justify-content:space-between;white-space:nowrap;transform:translateX(calc(100% + 6px))} /* verticaal langs de gevels, in de marge */
 /* tweede scherm: half vak ruimte na de strip, daarna 3 scrollstappen */
-.o-scroll{height:calc(var(--q) * 3 + 100vh);margin-top:calc(var(--q) * -.5)}
+.o-scroll{height:calc(var(--q) * 3 + 100vh);margin-top:var(--q)}
 .o-plak{position:sticky;top:calc(50vh - var(--q) * 1.5 + var(--bar) / 2)}
 .o-t2{grid-column:1 / 5;grid-row:1 / 4;background:#fff;display:flex;flex-direction:column;justify-content:space-between}
 .o-t2 .o-kop{font-size:calc(var(--q) * .42 * .6)} /* bewijsregel: 60 % van de kop */
@@ -202,10 +202,10 @@ a{color:inherit;text-decoration:none}
   .o-menu b{grid-column:1 / 3;font-size:calc(var(--q) * .13)} /* iPhone: woord over de onderste twee vakken */
   .o-t1{grid-column:1 / 5;grid-row:3 / 6}
   .o-gevels{grid-column:1 / 5;grid-row:6 / 10}
-  .o-strip{grid-column:1 / 5;grid-row:10}
+  .o-strip{grid-column:4;grid-row:6 / 10;line-height:1;transform:translateX(calc(100% + 4px))}
   .o-kop{font-size:calc(var(--q) * .36)}
   .o-t2 .o-kop{font-size:calc(var(--q) * .36 * .6)}
-  .o-scroll{height:calc(var(--q) * 7 + 100vh);margin-top:calc(var(--q) * -.5)}
+  .o-scroll{height:calc(var(--q) * 7 + 100vh);margin-top:var(--q)}
   .o-t2{grid-column:1 / 5;grid-row:1 / 4}
   .o-plan{grid-column:1 / 5;grid-row:4 / 8}
   .o-plak{top:calc(100vh - var(--q) * 7 - 10px)}
