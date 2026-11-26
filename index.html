@@ -6,17 +6,9 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>XUNITZ — Compact modulair wonen</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=20261126-1545">
+<link rel="stylesheet" href="css/style.css?v=20261126-1600">
 </head>
 <body>
-<header class="bar" id="balk">
-  <a href="#woning"><img class="bar-logo" src="img/logo.svg" alt="XUNITZ"></a>
-  <nav aria-label="Hoofdmenu">
-    <a href="#systeem">02 Systeem</a>
-    <a href="#indelingen">05 Indelingen</a>
-    <a href="#contact">07 Contact</a>
-  </nav>
-</header>
 <main>
 
 <!-- 01 — Opening: vlakverdeling op het vierkante raster (7 vakken breed, 4 op de iPhone) -->
@@ -232,12 +224,6 @@ if(/[?&]raster\b/.test(location.search))document.documentElement.classList.add('
   window.addEventListener('scroll',mark,{passive:true});window.addEventListener('resize',mark);mark();
 })();
 
-// opening: vaste balk zodra de menuvakken uit beeld zijn
-(function(){
-  var balk=document.getElementById('balk'),menu=document.querySelector('.o-menu');
-  if(!balk||!menu||!('IntersectionObserver' in window)){if(balk)balk.classList.add('aan');return}
-  new IntersectionObserver(function(e){balk.classList.toggle('aan',!e[0].isIntersecting&&e[0].boundingClientRect.top<0)}).observe(menu);
-})();
 // opening: drie scrollstappen — Ontworpen (lijn), Gebouwd (muren), Bewoond (inrichting)
 (function(){
   var blok=document.getElementById('o-stappen');if(!blok)return;

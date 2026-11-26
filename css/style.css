@@ -155,9 +155,10 @@ a{color:inherit;text-decoration:none}
    ========================================================= */
 .opening{--cols:7;--q:calc((100vw - 2 * var(--pad)) / var(--cols));--g:calc(var(--q) * .04);
   background-image:linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px);
-  background-size:var(--q) var(--q);background-position:var(--pad) calc(var(--q) * .75)} /* rij 1 is een half vak: raster begint onder rij 1 */
+  background-size:var(--q) var(--q);background-position:var(--pad) calc(var(--q) * .5)} /* rij 1 = half vak tegen de bovenrand; eerste horizontale lijn onder rij 1 */
 .o-r{display:grid;grid-template-columns:repeat(var(--cols),var(--q));grid-auto-rows:var(--q);padding:0 var(--pad)}
-.o-top{padding-top:calc(var(--q) * .25);grid-template-rows:calc(var(--q) * .5)}
+.o-top{grid-template-rows:calc(var(--q) * .5)}
+html{scroll-padding-top:0}
 .o-p{margin:calc(var(--g) / 2);padding:calc(var(--q) * .14);position:relative;min-width:0}
 .o-kop{font-family:var(--display);font-weight:700;font-feature-settings:"ss05" 1,"ss06" 1,"ss07" 1,"ss08" 1;text-transform:uppercase;letter-spacing:-.06em;line-height:.9;white-space:nowrap;font-size:calc(var(--q) * .42)}
 .o-kop span{display:block}
@@ -188,14 +189,8 @@ a{color:inherit;text-decoration:none}
 .o-plan img{position:absolute;inset:4%;width:92%;height:92%;object-fit:contain;opacity:0;transition:opacity .6s}
 .o-plan img.aan{opacity:1}
 .o-lab{position:absolute;left:calc(var(--q) * .14);top:calc(var(--q) * .14);z-index:1}
-/* vaste balk: logo + menu, verschijnt zodra de menuvakken uit beeld zijn */
-.bar{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--hair);transform:translateY(-101%);transition:transform .35s ease}
-.bar.aan{transform:none}
-.bar-logo{height:16px;width:auto;display:block}
-.bar nav{white-space:nowrap}
-.bar>nav:nth-child(2){padding-left:0;display:flex}
 @media (max-width:899px){
-  .opening{--cols:4;background-position:var(--pad) calc(var(--q) * .25)}
+  .opening{--cols:4;background-position:var(--pad) 0}
   .o-top{grid-template-rows:calc(var(--q) * .5) calc(var(--q) * .5)} /* logo en menu samen één vak */
   .o-m1{grid-column:1}.o-m2{grid-column:2}.o-m3{grid-column:3}
   .o-menu{grid-row:2}
@@ -210,10 +205,6 @@ a{color:inherit;text-decoration:none}
   .o-t2{grid-column:1 / 5;grid-row:1 / 4}
   .o-plan{grid-column:1 / 5;grid-row:4 / 8}
   .o-plak{top:calc(100vh - var(--q) * 7 - 10px)}
-}
-@media (max-width:600px){
-  .bar nav{gap:14px;font-size:9px}
-  .bar-logo{height:12px}
 }
 @media (prefers-reduced-motion:reduce){.o-t2 .o-kop span,.o-plan img{opacity:1;transform:none;transition:none}}
 
