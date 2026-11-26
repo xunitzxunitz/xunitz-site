@@ -146,6 +146,11 @@ html{scroll-padding-top:0}
 .o-logo{grid-column:1 / 3;grid-row:1;display:flex;align-items:center;padding:0 0 0 calc(var(--q) * .312)}
 /* logo op het raster: deellijnen vallen tussen × | UNI | TZ (precies 4 vierkantjes kan niet met deze letterafstanden) */
 .o-logo img{width:calc(var(--q) * 1.0444);height:auto;max-width:none}
+/* logovak + 2 vakken ernaast: fijner raster in vierkantjes van een kwart vak */
+.o-logo::before{content:"";position:absolute;left:calc(var(--g) / -2);top:calc(var(--g) / -2);width:calc(var(--q) * 4);height:calc(var(--q) * .5);z-index:0;pointer-events:none;
+  background-image:linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px);
+  background-size:calc(var(--q) / 4) calc(var(--q) / 4)}
+.o-logo img{position:relative;z-index:1;background:var(--paper)} /* ondergrond: geen lijnen door de letters */
 /* menuvak = 2 kleine vakken naast elkaar: cijfer en woord in het linker vak */
 .o-menu{grid-row:1;padding:0;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr;transition:background .2s,color .2s;}
 .o-menu>*{padding:calc(var(--q) * .06)}
@@ -153,7 +158,7 @@ html{scroll-padding-top:0}
 .o-menu b{grid-column:1;grid-row:1;align-self:end;white-space:nowrap;font-family:var(--display);font-weight:400;font-size:calc(var(--q) * .063);letter-spacing:-.03em;text-transform:uppercase}
 .o-menu:hover{background:var(--ink);color:var(--paper)}
 .o-m1{grid-column:5}.o-m2{grid-column:6}.o-m3{grid-column:7}
-.o-t1{grid-column:1 / 5;grid-row:2 / 5;background:#eeebe3;display:flex;flex-direction:column;justify-content:space-between}
+.o-t1{grid-column:1 / 5;grid-row:2 / 5;margin:0;background-color:#eeebe3;background-image:linear-gradient(to right,rgba(11,11,11,.07) 1px,transparent 1px),linear-gradient(to bottom,rgba(11,11,11,.07) 1px,transparent 1px);background-size:var(--q) var(--q);padding:calc(var(--q) * .14 + var(--g) / 2);display:flex;flex-direction:column;justify-content:space-between}
 .o-gevels{grid-column:5 / 8;grid-row:2 / 5;margin:calc(var(--g) / 2);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:var(--g)}
 .o-gevels figure{position:relative;overflow:hidden;background:#d9d7d0}
 .o-gevels img{width:100%;height:100%;object-fit:cover;display:block}
